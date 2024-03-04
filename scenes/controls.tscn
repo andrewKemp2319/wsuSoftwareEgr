@@ -1,0 +1,142 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8i3uuqn0vjd6"]
+
+[ext_resource type="Script" path="res://src/ControlsMenu.cs" id="1_v3vy6"]
+[ext_resource type="Texture2D" uid="uid://tnma6q8mb0js" path="res://art/controls.jpg" id="2_6sgrw"]
+[ext_resource type="PackedScene" uid="uid://ccyf3gp4fbpib" path="res://scenes/pause.tscn" id="3_30q8q"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v3vy6")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 470.0
+offset_top = 15.0
+offset_right = 676.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "Controls"
+
+[node name="Words" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 102.0
+offset_right = 585.0
+offset_bottom = 142.0
+
+[node name="Right" type="Label" parent="Words"]
+layout_mode = 2
+text = "Move Right   "
+
+[node name="Up" type="Label" parent="Words"]
+layout_mode = 2
+text = "Move UP"
+
+[node name="Down" type="Label" parent="Words"]
+layout_mode = 2
+text = "Move Down"
+
+[node name="Left" type="Label" parent="Words"]
+layout_mode = 2
+text = "Move Left "
+
+[node name="Jump" type="Label" parent="Words"]
+layout_mode = 2
+text = "Jump  "
+
+[node name="Crouch" type="Label" parent="Words"]
+layout_mode = 2
+text = "Crouch  "
+
+[node name="Primary" type="Label" parent="Words"]
+layout_mode = 2
+text = "Primary Attack"
+
+[node name="Dash" type="Label" parent="Words"]
+layout_mode = 2
+text = "Dash"
+
+[node name="Pickup" type="Label" parent="Words"]
+layout_mode = 2
+text = "Pickup Item"
+
+[node name="Pause" type="Label" parent="Words"]
+layout_mode = 2
+text = "Pause Game"
+
+[node name="Keys" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 102.0
+offset_right = 711.0
+offset_bottom = 188.0
+
+[node name="Right" type="Label" parent="Keys"]
+layout_mode = 2
+text = "D"
+
+[node name="Up" type="Label" parent="Keys"]
+layout_mode = 2
+text = "W"
+
+[node name="Down" type="Label" parent="Keys"]
+layout_mode = 2
+text = "S"
+
+[node name="Left" type="Label" parent="Keys"]
+layout_mode = 2
+text = "A"
+
+[node name="Jump" type="Label" parent="Keys"]
+layout_mode = 2
+text = "Space"
+
+[node name="Crouch" type="Label" parent="Keys"]
+layout_mode = 2
+text = "Shift"
+
+[node name="Primary" type="Label" parent="Keys"]
+layout_mode = 2
+text = "Left Mouseclick"
+
+[node name="Dash" type="Label" parent="Keys"]
+layout_mode = 2
+text = "Right Mouseclick"
+
+[node name="Pickup" type="Label" parent="Keys"]
+layout_mode = 2
+text = "E"
+
+[node name="Pickup2" type="Label" parent="Keys"]
+layout_mode = 2
+text = "Escape"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+mouse_filter = 2
+texture = ExtResource("2_6sgrw")
+
+[node name="Return" type="Button" parent="."]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 501.0
+offset_right = 614.0
+offset_bottom = 551.0
+theme_override_font_sizes/font_size = 20
+text = "Return"
+
+[node name="Pause" parent="." instance=ExtResource("3_30q8q")]
+visible = false
+top_level = true
+layout_mode = 1
+
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

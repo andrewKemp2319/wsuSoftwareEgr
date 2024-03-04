@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccyf3gp4fbpib"]
+
+[ext_resource type="Script" path="res://src/PauseMenu.cs" id="1_uylmd"]
+[ext_resource type="PackedScene" uid="uid://cebag2smta2r" path="res://scenes/pop.tscn" id="2_l1v1k"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uylmd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 261.0
+offset_right = 596.0
+offset_bottom = 362.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0.447059, 0.447059, 0.447059, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 516.0
+offset_top = 250.0
+offset_right = 601.0
+offset_bottom = 375.0
+mouse_filter = 2
+
+[node name="ControlsPop" parent="." instance=ExtResource("2_l1v1k")]
+visible = false
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="close_requested" from="ControlsPop" to="." method="_on_controls_pop_close_requested"]

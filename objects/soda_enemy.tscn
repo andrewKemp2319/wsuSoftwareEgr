@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://jep3vwvrqbr4"]
+
+[ext_resource type="Script" path="res://src/EnemyBase.cs" id="1_gyus2"]
+[ext_resource type="Texture2D" uid="uid://cmqvu54v5m070" path="res://art/Enemies Spritesheet.png" id="1_uu0v6"]
+[ext_resource type="AudioStream" uid="uid://b1ilt2wi1v6ow" path="res://sfx/hurt.wav" id="2_uf5hb"]
+[ext_resource type="AudioStream" uid="uid://bgnvqfh6s54hj" path="res://sfx/shoot.wav" id="3_vhpny"]
+[ext_resource type="Script" path="res://src/Turret.cs" id="4_s7fi6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c58td"]
+size = Vector2(30, 46)
+
+[node name="Soda Enemy" type="CharacterBody2D"]
+script = ExtResource("1_gyus2")
+streams = Array[AudioStream]([ExtResource("2_uf5hb"), ExtResource("3_vhpny")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_uu0v6")
+region_enabled = true
+region_rect = Rect2(6, 2, 20, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c58td")
+
+[node name="Turret" type="Sprite2D" parent="."]
+position = Vector2(12, 3)
+rotation = 3.14159
+scale = Vector2(0.125, 0.0625)
+script = ExtResource("4_s7fi6")
+
+[node name="Node2D" type="Node2D" parent="Turret"]
+position = Vector2(-64, 0)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+
+[connection signal="OnFire" from="Turret" to="." method="PlayShootSound"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

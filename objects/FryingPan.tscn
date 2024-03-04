@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv0xj835rbve3"]
+
+[ext_resource type="Texture2D" uid="uid://dk530528oosy4" path="res://art/frying_pan.png" id="1_vhhy2"]
+[ext_resource type="Texture2D" uid="uid://3j481h4kdxog" path="res://art/weapon_hit_effect.png" id="2_q7gcc"]
+[ext_resource type="Script" path="res://src/MeleeWeapon.cs" id="2_tbmnj"]
+[ext_resource type="AudioStream" uid="uid://cljx0vygdg55r" path="res://sfx/slash.wav" id="4_e5wnu"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_27oss"]
+a = Vector2(6.0056, 4.35903)
+b = Vector2(-5.48011, -5.19481)
+
+[node name="Frying Pan" type="Sprite2D"]
+rotation = -1.5708
+texture = ExtResource("1_vhhy2")
+script = ExtResource("2_tbmnj")
+
+[node name="Hit Effect" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4.90035, 13.266)
+rotation = 2.14507
+scale = Vector2(5, 5)
+texture = ExtResource("2_q7gcc")
+
+[node name="Area2D" type="Area2D" parent="Hit Effect"]
+position = Vector2(0.423681, -0.707457)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Effect/Area2D"]
+shape = SubResource("SegmentShape2D_27oss")
+
+[node name="weaponTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_e5wnu")
+volume_db = -5.0
+
+[connection signal="body_entered" from="Hit Effect/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="weaponTimer" to="." method="_on_weapon_timer_timeout"]

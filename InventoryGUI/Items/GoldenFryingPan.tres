@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://djuygqdtxmtat"]
+
+[ext_resource type="Texture2D" uid="uid://dc8uuagmcn5qn" path="res://art/Items/golden_frying_pan.png" id="1_4nnnh"]
+[ext_resource type="Script" path="res://src/inventoryItem.cs" id="2_xob48"]
+
+[resource]
+script = ExtResource("2_xob48")
+name = ""
+Texture = ExtResource("1_4nnnh")

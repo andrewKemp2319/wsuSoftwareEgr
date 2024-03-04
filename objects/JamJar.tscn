@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceynj0yv1wkkc"]
+
+[ext_resource type="Texture2D" uid="uid://bqv23klmrfkhe" path="res://art/JellyJar.png" id="1_7ax7v"]
+[ext_resource type="Script" path="res://src/RangedWeapon.cs" id="2_0jkx6"]
+[ext_resource type="PackedScene" uid="uid://bnl34wo8hlx1y" path="res://objects/Projectile.tscn" id="3_d6q6r"]
+[ext_resource type="AudioStream" uid="uid://bgnvqfh6s54hj" path="res://sfx/shoot.wav" id="4_aq3yv"]
+
+[node name="Jam Jar" type="Sprite2D"]
+rotation = 1.5708
+texture = ExtResource("1_7ax7v")
+script = ExtResource("2_0jkx6")
+projScene = ExtResource("3_d6q6r")
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(-6.11959e-07, -14)
+rotation = -1.5708
+
+[node name="weaponTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_aq3yv")
+volume_db = -5.0
+
+[connection signal="timeout" from="weaponTimer" to="." method="_on_weapon_timer_timeout"]

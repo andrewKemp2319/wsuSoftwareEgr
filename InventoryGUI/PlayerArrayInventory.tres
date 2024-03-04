@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dbwm8up7hvkq6"]
+
+[ext_resource type="Resource" uid="uid://djuygqdtxmtat" path="res://InventoryGUI/Items/GoldenFryingPan.tres" id="1_w47j2"]
+[ext_resource type="Script" path="res://src/inventoryarray.cs" id="1_xde8k"]
+
+[resource]
+script = ExtResource("1_xde8k")
+Items = [ExtResource("1_w47j2"), null, null]

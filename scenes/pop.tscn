@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://cebag2smta2r"]
+
+[node name="ControlsPop" type="Window"]
+title = "Controls"
+position = Vector2i(400, 175)
+size = Vector2i(400, 300)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -73.0
+offset_right = 115.0
+offset_bottom = 73.0
+grow_vertical = 2
+
+[node name="Words" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Right" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Move Right   "
+
+[node name="Up" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Move UP"
+
+[node name="Down" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Move Down"
+
+[node name="Left" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Move Left "
+
+[node name="Jump" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Jump  "
+
+[node name="Crouch" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Crouch  "
+
+[node name="Primary" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Primary Attack"
+
+[node name="Dash" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Dash"
+
+[node name="Pickup" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Pickup Item"
+
+[node name="Pause" type="Label" parent="MarginContainer/Words"]
+layout_mode = 2
+text = "Pause Game"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -73.0
+offset_bottom = 73.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Keys" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="Right" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "D"
+
+[node name="Up" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "W"
+
+[node name="Down" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "S"
+
+[node name="Left" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "A"
+
+[node name="Jump" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "Space"
+
+[node name="Crouch" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "Shift"
+
+[node name="Primary" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "Left Mouseclick"
+
+[node name="Dash" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "Right Mouseclick"
+
+[node name="Pickup" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "E"
+
+[node name="Pickup2" type="Label" parent="MarginContainer2/Keys"]
+layout_mode = 2
+text = "Escape"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

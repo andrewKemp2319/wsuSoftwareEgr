@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjljp13tqk8rb"]
+
+[ext_resource type="Script" path="res://src/WeaponSwitch.cs" id="1_03foh"]
+[ext_resource type="PackedScene" uid="uid://ceynj0yv1wkkc" path="res://objects/JamJar.tscn" id="1_5s7pf"]
+[ext_resource type="AudioStream" uid="uid://cq8b3m82aoivv" path="res://sfx/interact.wav" id="3_2stdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kpib"]
+size = Vector2(60, 47)
+
+[sub_resource type="Animation" id="Animation_pfkgq"]
+resource_name = "Interact_Bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -38), Vector2(-5, -31), Vector2(-5, -38)]
+}
+
+[sub_resource type="Animation" id="Animation_2vstg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -38)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kw8se"]
+_data = {
+"Interact_Bob": SubResource("Animation_pfkgq"),
+"RESET": SubResource("Animation_2vstg")
+}
+
+[node name="Weapon Switch" type="Node2D"]
+script = ExtResource("1_03foh")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_7kpib")
+
+[node name="Jam Jar" parent="." instance=ExtResource("1_5s7pf")]
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2stdv")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -5.0
+offset_top = -38.0
+offset_right = 5.0
+offset_bottom = -12.0
+text = "E"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kw8se")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,0 +1,188 @@
+[gd_scene load_steps=15 format=3 uid="uid://dyfpevb2ajb3c"]
+
+[ext_resource type="Script" path="res://src/player.cs" id="1_w63ie"]
+[ext_resource type="Texture2D" uid="uid://dc1jhkug8luuf" path="res://art/Player_sheet.png" id="2_qw6j6"]
+[ext_resource type="PackedScene" uid="uid://bv0xj835rbve3" path="res://objects/FryingPan.tscn" id="3_mhekh"]
+
+[sub_resource type="Animation" id="Animation_8druh"]
+resource_name = "Crawl"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_oetkq"]
+resource_name = "Crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_vkugx"]
+resource_name = "Dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_m0mqq"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_n5ix3"]
+resource_name = "Jump_fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_vivus"]
+resource_name = "Jump_Rise"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_lmiq0"]
+resource_name = "Run"
+length = 0.15
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hsmby"]
+_data = {
+"Crawl": SubResource("Animation_8druh"),
+"Crouch": SubResource("Animation_oetkq"),
+"Dash": SubResource("Animation_vkugx"),
+"Idle": SubResource("Animation_m0mqq"),
+"Jump_Fall": SubResource("Animation_n5ix3"),
+"Jump_Rise": SubResource("Animation_vivus"),
+"Run": SubResource("Animation_lmiq0")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nywtd"]
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m6jnc"]
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fgm2u"]
+radius = 13.0
+height = 54.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_w63ie")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_qw6j6")
+hframes = 4
+vframes = 3
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hsmby")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_nywtd")
+metadata/_edit_lock_ = true
+
+[node name="dashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="CrouchShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11)
+shape = SubResource("CapsuleShape2D_m6jnc")
+disabled = true
+debug_color = Color(0.992157, 0.0156863, 0.219608, 0.419608)
+
+[node name="weapon pivot" type="Node2D" parent="."]
+
+[node name="Frying Pan" parent="weapon pivot" instance=ExtResource("3_mhekh")]
+position = Vector2(25, 0)
+rotation = -1.29815
+
+[node name="wallJumpPushbackTimer" type="Timer" parent="."]
+wait_time = 0.075
+one_shot = true
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+
+[node name="itemHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="itemHitbox"]
+shape = SubResource("CapsuleShape2D_fgm2u")
+
+[connection signal="timeout" from="dashTimer" to="." method="OnDashTimerTimeout"]
+[connection signal="timeout" from="wallJumpPushbackTimer" to="." method="OnWallJumpPushbackTimerTimeout"]
+[connection signal="area_entered" from="itemHitbox" to="." method="_on_item_hitbox_area_entered"]
